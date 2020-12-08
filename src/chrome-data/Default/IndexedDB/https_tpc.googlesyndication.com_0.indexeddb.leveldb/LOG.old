@@ -1,0 +1,5 @@
+2020/11/29-13:51:34.683 1e103 Reusing MANIFEST /Users/beb/Code/challenges/lattice/puppeteer/src/chrome-data/Default/IndexedDB/https_tpc.googlesyndication.com_0.indexeddb.leveldb/MANIFEST-000001
+2020/11/29-13:51:37.059 1e103 Level-0 table #5: started
+2020/11/29-13:51:37.071 1e103 Level-0 table #5: 348 bytes OK
+2020/11/29-13:51:37.085 1e103 Delete type=0 #3
+2020/11/29-13:51:37.088 1e103 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
