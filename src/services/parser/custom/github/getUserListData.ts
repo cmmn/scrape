@@ -1,19 +1,14 @@
-import { userListLength } from '../shared';
-
-const NAME_SELECTOR =
-  '#user_search_results > div.user-list > div:nth-child(INDEX) > div:nth-child(2) > div > div > a';
-const DESCRIPTION_SELECTOR =
-  '#user_search_results > div.user-list > div:nth-child(INDEX) > div > p';
+import { userListLength } from '../../../shared';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const getUserListData = async (page: any): Promise<any> => {
+export const getUserListData = async (page: any, config: any): Promise<any> => {
   let users = [];
   const listLength = await userListLength(page);
 
   for (let i = 1; i <= listLength; i++) {
     // change the index to the next child
-    const nameSelector = NAME_SELECTOR.replace('INDEX', JSON.stringify(i));
-    const descriptionSelector = DESCRIPTION_SELECTOR.replace('INDEX', JSON.stringify(i));
+    const nameSelector = config.selectors.name.replace('INDEX', JSON.stringify(i));
+    const descriptionSelector = config.selectors.description.replace('INDEX', JSON.stringify(i));
 
     const name = await page.evaluate((sel) => {
       if (document.querySelector(sel)) {

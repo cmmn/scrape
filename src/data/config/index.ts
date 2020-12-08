@@ -1,21 +1,40 @@
 export type WaitUntil = 'networkidle0' | 'load' | 'domcontentloaded' | 'networkidle2';
-
+export interface SelectorConfig {
+  [key: string]: string;
+}
 export interface SiteConfig {
+  parserMethod: string;
   baseUrl: string;
   generateUserNameSearch: (name: string | undefined) => string;
-  userListSelector: string;
+  selectors: SelectorConfig;
+}
+export interface SiteConfigs {
+  [key: string]: SiteConfig;
 }
 export interface Config {
-  [key: string]: SiteConfig | WaitUntil | string;
+  [key: string]: WaitUntil | string;
 }
 
 export const config: Config = {
   waitUntil: 'networkidle0',
   selector: 'body',
+  defaultSiteConfig: 'github',
+  defaultNameSearch: 'john',
+};
+
+export const siteConfigs: SiteConfigs = {
   github: {
     baseUrl: 'https://github.com/',
     generateUserNameSearch: (name: string): string =>
       `search?q=${name || 'john'}&type=Users&utf8=%E2%9C%93`,
-    userListSelector: '.user-list',
+    parserMethod: 'getUserListData',
+    selectors: {
+      main: '.user-list',
+      userList: '.user-list',
+      name:
+        '#user_search_results > div.user-list > div:nth-child(INDEX) > div:nth-child(2) > div > div > a',
+      handle: '',
+      description: '#user_search_results > div.user-list > div:nth-child(INDEX) > div > p',
+    },
   },
 };
