@@ -2,8 +2,12 @@ export type WaitUntil = 'networkidle0' | 'load' | 'domcontentloaded' | 'networki
 export interface SelectorConfig {
   [key: string]: string;
 }
+export interface MethodData {
+  name: string;
+  methodName: string;
+}
 export interface SiteConfig {
-  parserMethod: string;
+  parserMethods: MethodData[];
   baseUrl: string;
   generateUserNameSearch: (name: string | undefined) => string;
   selectors: SelectorConfig;
@@ -27,13 +31,11 @@ export const siteConfigs: SiteConfigs = {
     baseUrl: 'https://github.com/',
     generateUserNameSearch: (name: string): string =>
       `search?q=${name || 'john'}&type=Users&utf8=%E2%9C%93`,
-    parserMethod: 'getUserListData',
+    parserMethods: [{ name: 'users', methodName: 'getUserListData' }],
     selectors: {
       main: '.user-list',
-      userList: '.user-list',
       name:
         '#user_search_results > div.user-list > div:nth-child(INDEX) > div:nth-child(2) > div > div > a',
-      handle: '',
       description: '#user_search_results > div.user-list > div:nth-child(INDEX) > div > p',
     },
   },

@@ -1,11 +1,12 @@
-import { config, siteConfigs, SelectorConfig } from '../../data';
+import { config, siteConfigs, SelectorConfig, MethodData } from '../../data';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
 export interface ScraperConfig {
   name: string;
-  parserMethodName: string;
+  parserMethods: MethodData[];
   url: string;
+  baseUrl: string;
   selectors: SelectorConfig;
 }
 
@@ -22,7 +23,8 @@ export const generateScraperConfig = (): ScraperConfig => {
       const selectors = siteConfigs[argv._[0]].selectors;
       return {
         name: argv._[0].toString(),
-        parserMethodName: siteConfigs[argv._[0]].parserMethod,
+        baseUrl: siteConfigs[argv._[0]].baseUrl,
+        parserMethods: siteConfigs[argv._[0]].parserMethods,
         url: baseUrl + searchQuery,
         selectors,
       };
@@ -33,7 +35,8 @@ export const generateScraperConfig = (): ScraperConfig => {
   const selectors = siteConfigs[config.defaultSiteConfig].selectors;
   return {
     name: config.defaultSiteConfig,
-    parserMethodName: siteConfigs[argv._[0]].parserMethod,
+    baseUrl: siteConfigs[argv._[0]].baseUrl,
+    parserMethods: siteConfigs[argv._[0]].parserMethods,
     url:
       siteConfigs[config.defaultSiteConfig].baseUrl +
       siteConfigs[config.defaultSiteConfig].generateUserNameSearch(

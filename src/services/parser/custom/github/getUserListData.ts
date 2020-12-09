@@ -1,4 +1,5 @@
 import { userListLength } from '../../../shared';
+import { getMoreUserData } from './getMoreUserData';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getUserListData = async (page: any, config: any): Promise<any> => {
@@ -34,5 +35,7 @@ export const getUserListData = async (page: any, config: any): Promise<any> => {
     }
   }
 
-  return users;
+  const usersWithMoreData = await getMoreUserData(page, users, config);
+
+  return usersWithMoreData;
 };

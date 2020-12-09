@@ -30,6 +30,6 @@ puppeteer
     // dequeue url
 
     // close browser
-    await browser.close();
+    browser.close();
   })
   .catch((rejected) => console.log('Catching all errors here', rejected));

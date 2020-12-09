@@ -1,1 +1,1 @@
-export { config, siteConfigs, SelectorConfig, WaitUntil } from './config';
+export { config, siteConfigs, SelectorConfig, MethodData, WaitUntil } from './config';
